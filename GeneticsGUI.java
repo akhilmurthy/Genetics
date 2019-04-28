@@ -15,7 +15,6 @@ public class GeneticsGUI
 {
    public static void main(String[] args) 
    {
-      boolean debug = true;
       JFrame window = new JFrame("Genetics");
       JPanel panel = new JPanel();
 
@@ -106,7 +105,6 @@ public class GeneticsGUI
       c.gridx = 0;
       c.gridy = 3;
       c.weightx = 1;
-      //           c.weighty = .1;
       c.insets = new Insets(0, 5, 0, 0);
       c.anchor = GridBagConstraints.LINE_START;
       panel.add(submit, c);
