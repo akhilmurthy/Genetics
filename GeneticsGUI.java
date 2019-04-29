@@ -48,7 +48,7 @@ public class GeneticsGUI
       c.fill = GridBagConstraints.HORIZONTAL;
       optionsPanel.add(optionsCombo, c);
 
-      String selected = (String) optionsCombo.getSelectedItem();
+      //String selected = (String) optionsCombo.getSelectedItem();
 
       JPanel parent1Panel = new JPanel(new GridBagLayout());
       c = new GridBagConstraints();
