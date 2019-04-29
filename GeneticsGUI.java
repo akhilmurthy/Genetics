@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -9,12 +11,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
-public class GeneticsGUI
-{
-   public static void main(String[] args) 
-   {
+public class GeneticsGUI {
+   public static void main(String[] args) {
       JFrame window = new JFrame("Genetics");
       JPanel panel = new JPanel();
 
@@ -38,7 +41,7 @@ public class GeneticsGUI
       c.insets = new Insets(0, 5, 0, 5);
       optionsPanel.add(optionsLabel, c);
 
-      String[] options = new String[]{"2x2 Punnett Square", "4x4 Punnett Square"};
+      String[] options = new String[] { "2x2 Punnett Square", "4x4 Punnett Square" };
       JComboBox<String> optionsCombo = new JComboBox<>(options);
 
       c = new GridBagConstraints();
@@ -48,7 +51,7 @@ public class GeneticsGUI
       c.fill = GridBagConstraints.HORIZONTAL;
       optionsPanel.add(optionsCombo, c);
 
-      //String selected = (String) optionsCombo.getSelectedItem();
+      String selected = (String) optionsCombo.getSelectedItem();
 
       JPanel parent1Panel = new JPanel(new GridBagLayout());
       c = new GridBagConstraints();
@@ -120,6 +123,25 @@ public class GeneticsGUI
       c.anchor = GridBagConstraints.LINE_START;
       c.fill = GridBagConstraints.BOTH;
       panel.add(resultsPanel, c);
+
+      submit.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == submit) {
+               String p1 = par1.getText();
+               String p2 = par2.getText();
+               if (selected.equals("2x2 Punnett Square")) {
+
+                  String[][] mono = Genetics.calculateMonohybrid(p1, p2);
+                  
+
+               } else if (selected.equals("4x4 Punnett Square")) {
+
+                  String[][] di = Genetics.calculateDihybrid(p1, p2);
+               }
+            }
+         }});
+
 
       window.add(panel);
       window.setSize(800, 800);
