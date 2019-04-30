@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Genetics
 {
     public static String[][] calculateMonohybrid(String parent1, String parent2)
@@ -15,6 +13,12 @@ public class Genetics
         String combination2 = p1_1 + p2_2;
         String combination3 = p1_2 + p2_1;
         String combination4 = p1_2 + p2_2;
+
+        combination1 = Genetics.reformatMonohybridCombo(combination1);
+        combination2 = Genetics.reformatMonohybridCombo(combination2);
+        combination3 = Genetics.reformatMonohybridCombo(combination3);
+        combination4 = Genetics.reformatMonohybridCombo(combination4);
+
         //Add each combination to the results array
         result[0][0] = combination1;
         result[1][0] = combination2;
@@ -37,7 +41,7 @@ public class Genetics
                 String p1 = parent1Combinations[i];
                 String p2 = parent2Combinations[j];
                 String combo = p1 + p2;
-                String reformattedCombo = reformatCombo(combo);
+                String reformattedCombo = reformatDihybridCombo(combo);
                 result[j][i] = reformattedCombo;
             }
         }
@@ -59,7 +63,7 @@ public class Genetics
         return result;
     }
 
-    public static String reformatCombo(String combination)
+    public static String reformatDihybridCombo(String combination)
     {
         //Associate like genotype letters
         char g1_1 = combination.substring(0,1).charAt(0);
@@ -80,26 +84,22 @@ public class Genetics
             g2_1 = temp;
 
         }
-        String associatedResult = String.valueOf(g1_1) + String.valueOf(g1_2) + String.valueOf(g2_1) + String.valueOf(g2_2);
+        String result = String.valueOf(g1_1) + String.valueOf(g1_2) + String.valueOf(g2_1) + String.valueOf(g2_2);
 
-        return associatedResult;
+        return result;
     }
 
-
-    // public static void main(String [] args)
-    // {
-    //     Genetics genetics = new Genetics();
-    //     String [][] monoTest = genetics.calculateMonohybrid("Aa", "AA");
-    //     System.out.println(Arrays.deepToString(monoTest));
-    //     System.out.println("----------");
-    //     String[] combo = genetics.parentCombinations("AaBB");
-    //     String[] combo2 = genetics.parentCombinations("AABb");
-    //     System.out.println(Arrays.toString(combo));
-    //     System.out.println(Arrays.toString(combo2));
-    //     System.out.println("----------");
-    //     String[][] diTest = genetics.calculateDihybrid("AaBB", "AABb");
-    //     System.out.println(Arrays.deepToString(diTest));
-    //     System.out.println("----------");
-    //     System.out.println(genetics.reformatCombo("abAB"));
-    // }
+    public static String reformatMonohybridCombo(String combination)
+    {
+        char g1 = combination.substring(0,1).charAt(0);
+        char g2 = combination.substring(1, 2).charAt(0);
+        if(Character.isUpperCase(g2) && !Character.isUpperCase(g1))
+        {
+            char temp = g2;
+            g2 = g1;
+            g1 = temp;
+        }
+        String result = String.valueOf(g1) + String.valueOf(g2);
+        return result;
+    }
 }
